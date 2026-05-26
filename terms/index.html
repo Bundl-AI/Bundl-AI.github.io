@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use — M9Y AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Archivo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --black: #080808;
+  --off-black: #0f0f0f;
+  --surface: #141414;
+  --surface2: #1a1a1a;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.14);
+  --white: #ffffff;
+  --off-white: #e8e8e8;
+  --muted: #888;
+  --dimmed: #555;
+  --green: #3ddc84;
+  --display: 'Archivo', sans-serif;
+  --body: 'Sora', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+  background: var(--white);
+  padding: 9px 20px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.nav-cta:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.legal-hero {
+  padding: 140px 0 64px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.legal-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 100%);
+}
+
+.legal-hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.legal-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legal-label::after {
+  content: '';
+  flex: 0 0 40px;
+  height: 1px;
+  background: var(--border-bright);
+}
+
+.legal-hero h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.legal-meta {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.legal-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 48px 120px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.legal-toc {
+  position: sticky;
+  top: 96px;
+}
+
+.legal-toc-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-bottom: 20px;
+}
+
+.legal-toc ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legal-toc a {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.legal-toc a:hover { color: var(--white); }
+
+.legal-prose {
+  max-width: 720px;
+}
+
+.legal-section {
+  margin-bottom: 56px;
+  scroll-margin-top: 96px;
+}
+
+.legal-section h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.legal-section p {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.legal-section p:last-child { margin-bottom: 0; }
+
+.legal-section ul {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+}
+
+.legal-section li {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.legal-section a {
+  color: var(--off-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.legal-section a:hover { color: var(--white); }
+
+footer {
+  background: var(--black);
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 48px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-brand .logo-footer {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--dimmed);
+  line-height: 1.65;
+  max-width: 220px;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-bottom: 20px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col a {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--white); }
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dimmed);
+  letter-spacing: 0.02em;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dimmed);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover { color: var(--muted); }
+
+@media (max-width: 900px) {
+  .nav-inner { padding: 0 24px; }
+  .nav-links { display: none; }
+  .legal-hero-inner, .legal-content { padding-left: 24px; padding-right: 24px; }
+  .legal-content { grid-template-columns: 1fr; gap: 40px; }
+  .legal-toc { position: static; }
+  .footer-main { grid-template-columns: 1fr 1fr; padding: 48px 24px; }
+  .footer-bottom { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="logo">M9Y AI</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../#companies">Companies</a></li>
+        <li><a href="../#philosophy">Philosophy</a></li>
+        <li><a href="../#contact">Contact</a></li>
+      </ul>
+      <a href="https://bundl.ai" class="nav-cta">Visit Bundl AI →</a>
+    </div>
+  </div>
+</nav>
+
+<header class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-label">Legal</div>
+    <h1>Terms of Use</h1>
+    <p class="legal-meta">Last updated: May 26, 2026 · M9Y AI Pvt Ltd</p>
+  </div>
+</header>
+
+<main class="legal-content">
+  <aside class="legal-toc">
+    <div class="legal-toc-title">On this page</div>
+    <ul>
+      <li><a href="#acceptance">Acceptance</a></li>
+      <li><a href="#services">Our services</a></li>
+      <li><a href="#use">Permitted use</a></li>
+      <li><a href="#ip">Intellectual property</a></li>
+      <li><a href="#third-party">Third-party links</a></li>
+      <li><a href="#disclaimers">Disclaimers</a></li>
+      <li><a href="#liability">Limitation of liability</a></li>
+      <li><a href="#governing">Governing law</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </aside>
+
+  <article class="legal-prose">
+    <section class="legal-section" id="acceptance">
+      <h2>1. Acceptance of terms</h2>
+      <p>These Terms of Use ("Terms") govern your access to and use of the M9Y AI website and related online properties operated by M9Y AI Pvt Ltd ("M9Y AI," "we," "us," or "our"). By accessing or using this site, you agree to be bound by these Terms and our <a href="../privacy/">Privacy Policy</a>.</p>
+      <p>If you do not agree to these Terms, you must not use this website. We may update these Terms at any time by posting a revised version on this page. Continued use after changes constitutes acceptance of the updated Terms.</p>
+    </section>
+
+    <section class="legal-section" id="services">
+      <h2>2. About our services</h2>
+      <p>This website provides general information about M9Y AI, our venture studio activities, and our portfolio companies, including Bundl AI, MakeMyPoll, and Yeesh. Nothing on this site constitutes a binding offer, professional advice, or a guarantee of future products, features, or business outcomes.</p>
+      <p>Separate terms and agreements apply when you engage with our portfolio companies for commercial services, consulting, or product use. Those engagements are governed by the applicable company’s contract, not solely by these website Terms.</p>
+    </section>
+
+    <section class="legal-section" id="use">
+      <h2>3. Permitted and prohibited use</h2>
+      <p>You may use this website for lawful, personal, and non-commercial informational purposes. You agree not to:</p>
+      <ul>
+        <li>Use the site in any way that violates applicable laws or regulations.</li>
+        <li>Attempt to gain unauthorized access to our systems, networks, or data.</li>
+        <li>Interfere with or disrupt the operation, security, or performance of the site.</li>
+        <li>Scrape, crawl, or harvest content or data through automated means without our prior written consent.</li>
+        <li>Impersonate M9Y AI, our employees, or our portfolio companies.</li>
+        <li>Transmit malware, spam, or harmful code through any interaction with our properties.</li>
+      </ul>
+      <p>We reserve the right to restrict or terminate access to the site for conduct that we reasonably believe violates these Terms or harms M9Y AI, our users, or third parties.</p>
+    </section>
+
+    <section class="legal-section" id="ip">
+      <h2>4. Intellectual property</h2>
+      <p>All content on this website — including text, graphics, logos, layout, design, and software — is owned by M9Y AI or its licensors and is protected by applicable intellectual property laws. You may not copy, modify, distribute, sell, or create derivative works from our content without prior written permission, except for limited personal viewing as intended by the site.</p>
+      <p>Company names, product names, and logos referenced on this site may be trademarks of M9Y AI or their respective owners. Use of those marks without authorization is prohibited.</p>
+    </section>
+
+    <section class="legal-section" id="third-party">
+      <h2>5. Third-party links and services</h2>
+      <p>Our website may contain links to third-party sites, including portfolio company websites such as <a href="https://bundl.ai">bundl.ai</a>. We are not responsible for the content, policies, or practices of third-party sites. Your use of third-party services is at your own risk and subject to their terms and privacy policies.</p>
+    </section>
+
+    <section class="legal-section" id="ai">
+      <h2>6. AI and forward-looking statements</h2>
+      <p>Descriptions of AI capabilities, automation systems, and product roadmaps on this site reflect our current vision and may change. AI outputs and systems can produce errors. Any examples, metrics, or case references are illustrative unless explicitly stated otherwise in a signed agreement.</p>
+    </section>
+
+    <section class="legal-section" id="disclaimers">
+      <h2>7. Disclaimers</h2>
+      <p>This website and all content are provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+      <p>We do not warrant that the site will be uninterrupted, error-free, secure, or free of viruses or other harmful components. Information on this site may contain inaccuracies or become outdated; we are under no obligation to update it.</p>
+    </section>
+
+    <section class="legal-section" id="liability">
+      <h2>8. Limitation of liability</h2>
+      <p>To the fullest extent permitted by applicable law, M9Y AI and its directors, officers, employees, affiliates, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of this website, even if we have been advised of the possibility of such damages.</p>
+      <p>Our total liability for any claim arising from these Terms or your use of the site shall not exceed one hundred Indian rupees (INR 100) or the minimum amount permitted by law, whichever is greater.</p>
+    </section>
+
+    <section class="legal-section" id="indemnity">
+      <h2>9. Indemnification</h2>
+      <p>You agree to indemnify and hold harmless M9Y AI and its affiliates from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your violation of these Terms or misuse of the website.</p>
+    </section>
+
+    <section class="legal-section" id="governing">
+      <h2>10. Governing law and disputes</h2>
+      <p>These Terms are governed by the laws of India, without regard to conflict-of-law principles. Any dispute arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in India, unless otherwise required by mandatory applicable law.</p>
+    </section>
+
+    <section class="legal-section" id="severability">
+      <h2>11. General provisions</h2>
+      <p>If any provision of these Terms is found unenforceable, the remaining provisions will remain in full force. Our failure to enforce any right or provision does not constitute a waiver. These Terms constitute the entire agreement between you and M9Y AI regarding use of this website.</p>
+    </section>
+
+    <section class="legal-section" id="contact">
+      <h2>12. Contact</h2>
+      <p>Questions about these Terms may be directed to:</p>
+      <p>
+        <strong>M9Y AI Pvt Ltd</strong><br>
+        Email: <a href="mailto:hello@m9y.ai">hello@m9y.ai</a><br>
+        Incorporated in India
+      </p>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand footer-col">
+      <span class="logo-footer">M9Y AI</span>
+      <p class="footer-tagline">An AI-native venture studio building automation infrastructure and applied intelligence products.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Companies</div>
+      <ul>
+        <li><a href="https://bundl.ai">Bundl AI</a></li>
+        <li><a href="../#companies">MakeMyPoll</a></li>
+        <li><a href="../#companies">Yeesh</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="../#philosophy">About</a></li>
+        <li><a href="mailto:careers@m9y.ai">Careers</a></li>
+        <li><a href="../#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Legal</div>
+      <ul>
+        <li><a href="../privacy/">Privacy Policy</a></li>
+        <li><a href="../terms/">Terms of Use</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 M9Y AI Pvt Ltd. All rights reserved. Incorporated in India.</span>
+    <div class="footer-legal">
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+      <a href="mailto:hello@m9y.ai">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

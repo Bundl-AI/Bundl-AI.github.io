@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M9Y AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Archivo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --black: #080808;
+  --off-black: #0f0f0f;
+  --surface: #141414;
+  --surface2: #1a1a1a;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.14);
+  --white: #ffffff;
+  --off-white: #e8e8e8;
+  --muted: #888;
+  --dimmed: #555;
+  --accent: #fff;
+  --green: #3ddc84;
+  --display: 'Archivo', sans-serif;
+  --body: 'Sora', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+  background: var(--white);
+  padding: 9px 20px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.nav-cta:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0 80px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle grid background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* Glow */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.1s forwards;
+}
+
+.hero-label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(56px, 7.5vw, 108px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--white);
+  max-width: 900px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
+}
+
+h1 .dim {
+  color: var(--dimmed);
+}
+
+.hero-body {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.35s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.5s forwards;
+}
+
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-white:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 14px;
+  padding: 14px 24px;
+  border: 1px solid var(--border-bright);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-ghost:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1s forwards;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--dimmed), transparent);
+  animation: scrollLine 2s ease infinite;
+}
+
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─── STATS BAR ─── */
+.stats-bar {
+  border-bottom: 1px solid var(--border);
+  background: var(--off-black);
+}
+
+.stats-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-item {
+  padding: 44px 0;
+  border-right: 1px solid var(--border);
+  padding-right: 48px;
+  padding-left: 48px;
+}
+
+.stat-item:first-child { padding-left: 0; }
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 38px;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ─── SECTION COMMON ─── */
+.section {
+  border-bottom: 1px solid var(--border);
+}
+
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 100px 48px;
+}
+
+.section-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-tag::after {
+  content: '';
+  flex: 0 0 40px;
+  height: 1px;
+  background: var(--border-bright);
+}
+
+/* ─── COMPANY FEATURE ─── */
+.company-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.company-left {
+  padding: 64px;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.company-right {
+  padding: 64px;
+  background: var(--off-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.company-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: rgba(61,220,132,0.08);
+  border: 1px solid rgba(61,220,132,0.2);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 36px;
+}
+
+.company-name-large {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(40px, 4vw, 60px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+
+.company-tagline {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 48px;
+  max-width: 440px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 52px;
+}
+
+.service-cell {
+  background: var(--surface2);
+  padding: 20px 24px;
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--off-white);
+  line-height: 1.5;
+  transition: background 0.2s;
+}
+
+.service-cell:hover {
+  background: var(--surface);
+}
+
+.service-cell-icon {
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.visit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: gap 0.2s;
+}
+
+.visit-link:hover { gap: 16px; }
+
+.visit-link .arrow {
+  font-size: 20px;
+  color: var(--muted);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.visit-link:hover .arrow {
+  color: var(--white);
+  transform: translateX(4px);
+}
+
+/* Right panel */
+.right-top {}
+
+.kpi-block {
+  margin-bottom: 48px;
+}
+
+.kpi-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-bottom: 10px;
+}
+
+.kpi-value {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  line-height: 1;
+}
+
+.kpi-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.right-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+
+.detail-rows {}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+.detail-row:last-child { border-bottom: none; }
+
+.row-key {
+  color: var(--dimmed);
+  font-weight: 300;
+}
+
+.row-val {
+  color: var(--off-white);
+  font-weight: 400;
+  text-align: right;
+}
+
+/* ─── SECONDARY COMPANY CARDS ─── */
+.secondary-companies {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.sec-card {
+  background: var(--off-black);
+  padding: 52px 56px;
+  transition: background 0.2s;
+}
+
+.sec-card:hover {
+  background: var(--surface);
+}
+
+.sec-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  background: var(--surface2);
+  border: 1px solid var(--border-bright);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+}
+
+.sec-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(30px, 3vw, 44px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.sec-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 380px;
+  margin-bottom: 36px;
+}
+
+.sec-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sec-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.sec-feature::before {
+  content: '—';
+  color: var(--dimmed);
+  flex-shrink: 0;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .secondary-companies { grid-template-columns: 1fr; }
+  .sec-card { padding: 36px; }
+}
+
+/* ─── PHILOSOPHY ─── */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.philosophy-heading {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(36px, 3.5vw, 52px);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.philosophy-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.principles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.principle {
+  background: var(--off-black);
+  padding: 36px;
+  transition: background 0.2s;
+}
+
+.principle:hover {
+  background: var(--surface);
+}
+
+.principle-num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--dimmed);
+  margin-bottom: 20px;
+}
+
+.principle-title {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.principle-text {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ─── CONTACT / CTA ─── */
+.cta-section {
+  background: var(--off-black);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.cta-heading {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(40px, 4vw, 64px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.cta-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 48px;
+}
+
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.contact-card:hover {
+  border-color: var(--border-bright);
+  background: var(--surface2);
+}
+
+.cc-left {}
+
+.cc-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-bottom: 4px;
+}
+
+.cc-value {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.cc-arrow {
+  color: var(--dimmed);
+  font-size: 18px;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.contact-card:hover .cc-arrow {
+  transform: translate(3px, -3px);
+  color: var(--white);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black);
+  padding: 0;
+}
+
+.footer-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 48px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-brand .logo-footer {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--dimmed);
+  line-height: 1.65;
+  max-width: 220px;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-bottom: 20px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col a {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--white); }
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dimmed);
+  letter-spacing: 0.02em;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dimmed);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover { color: var(--muted); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .nav-inner { padding: 0 24px; }
+  .nav-links { display: none; }
+  h1 { font-size: 48px; }
+  .hero-inner, .section-inner, .cta-inner { padding-left: 24px; padding-right: 24px; }
+  .stats-inner { grid-template-columns: 1fr 1fr; padding: 0 24px; }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-right: 1px solid var(--border); padding-left: 0; }
+  .stat-item:last-child { padding-left: 0; }
+  .company-layout { grid-template-columns: 1fr; }
+  .company-left { border-right: none; border-bottom: 1px solid var(--border); padding: 36px; }
+  .company-right { padding: 36px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .philosophy-grid { grid-template-columns: 1fr; gap: 48px; }
+  .principles { grid-template-columns: 1fr; }
+  .cta-inner { grid-template-columns: 1fr; gap: 48px; }
+  .footer-main { grid-template-columns: 1fr 1fr; padding: 48px 24px; }
+  .footer-bottom { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">M9Y AI</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#companies">Companies</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://bundl.ai" class="nav-cta">Visit Bundl AI →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">
+      <span class="hero-label-dot"></span>
+      AI Venture Studio · New York · Mumbai · Mangalore
+    </div>
+    <h1>Building<br><span class="dim">AI-native</span><br>companies.</h1>
+    <p class="hero-body">M9Y AI is a venture studio creating automation infrastructure, AI workforce systems, and applied intelligence products for the next decade of business.</p>
+    <div class="hero-actions">
+      <a href="https://bundl.ai" class="btn-white">Our flagship — Bundl AI →</a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num">2026</div>
+      <div class="stat-label">Founded</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Operating companies</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">B2B</div>
+      <div class="stat-label">Primary market</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">AI-first</div>
+      <div class="stat-label">By design</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPANIES -->
+<section class="section" id="companies">
+  <div class="section-inner">
+    <div class="section-tag">Portfolio</div>
+
+    <div class="company-layout reveal">
+      <div class="company-left">
+        <span class="company-badge">● Active · AI Consultancy</span>
+        <div class="company-name-large">Bundl AI</div>
+        <p class="company-tagline">Bundl AI designs and deploys AI employees, automation systems, and intelligent workflows for modern businesses. Not software that suggests — infrastructure that executes.</p>
+
+        <div class="services-grid">
+          <div class="service-cell">
+            <span class="service-cell-icon">⚙</span>
+            AI workforce design & deployment
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">⟳</span>
+            End-to-end automation systems
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">◈</span>
+            Enterprise AI integration
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">◎</span>
+            Custom agent architecture
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">◲</span>
+            Operations & support automation
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">◐</span>
+            Strategic AI advisory
+          </div>
+        </div>
+
+        <a href="https://bundl.ai" class="visit-link">
+          bundl.ai <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="company-right">
+        <div class="right-top">
+          <div class="kpi-block">
+            <div class="kpi-label">Focus</div>
+            <div class="kpi-value">Enterprise & SMB</div>
+            <div class="kpi-sub">B2B clients across industries</div>
+          </div>
+          <div class="kpi-block">
+            <div class="kpi-label">Delivery model</div>
+            <div class="kpi-value">Consulting + Retainer</div>
+            <div class="kpi-sub">Engagements, builds, ongoing ops</div>
+          </div>
+          <div class="kpi-block">
+            <div class="kpi-label">Geography</div>
+            <div class="kpi-value">Global</div>
+            <div class="kpi-sub">Headquartered in India</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="right-divider"></div>
+          <div class="detail-rows">
+            <div class="detail-row">
+              <span class="row-key">Parent entity</span>
+              <span class="row-val">M9Y AI Pvt Ltd</span>
+            </div>
+            <div class="detail-row">
+              <span class="row-key">Product website</span>
+              <span class="row-val">bundl.ai</span>
+            </div>
+            <div class="detail-row">
+              <span class="row-key">Stage</span>
+              <span class="row-val">Revenue-generating</span>
+            </div>
+            <div class="detail-row">
+              <span class="row-key">Type</span>
+              <span class="row-val">Services + Systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secondary-companies reveal">
+      <div class="sec-card">
+        <span class="sec-badge">Political AI · Polling</span>
+        <div class="sec-name">MakeMyPoll</div>
+        <p class="sec-desc">An AI pollster built for political parties and campaigns. Real-time sentiment analysis, voter modelling, and polling intelligence — without the lag of traditional research.</p>
+        <div class="sec-features">
+          <div class="sec-feature">AI-generated polling and survey design</div>
+          <div class="sec-feature">Voter sentiment modelling at scale</div>
+          <div class="sec-feature">Campaign intelligence and trend analysis</div>
+          <div class="sec-feature">Real-time political pulse tracking</div>
+        </div>
+      </div>
+      <div class="sec-card">
+        <span class="sec-badge">AI Hiring · Talent</span>
+        <div class="sec-name">Yeesh</div>
+        <p class="sec-desc">An AI hiring manager that runs end-to-end recruitment — per job or per lead. From sourcing and screening to shortlisting and scheduling, without a human in the loop.</p>
+        <div class="sec-features">
+          <div class="sec-feature">Autonomous end-to-end hiring per role</div>
+          <div class="sec-feature">AI-led candidate screening and scoring</div>
+          <div class="sec-feature">Lead qualification and outreach automation</div>
+          <div class="sec-feature">Structured decision pipeline per job</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="philosophy">
+  <div class="section-inner">
+    <div class="section-tag">Philosophy</div>
+    <div class="philosophy-grid">
+      <div>
+        <h2 class="philosophy-heading reveal">Intelligence that works, not just impresses.</h2>
+        <p class="philosophy-body reveal">Most AI projects succeed in the demo and fail in production. We build for the second month, not the first meeting. Every company under M9Y is designed to operate quietly, scale without friction, and compound in value over time.</p>
+      </div>
+      <div class="principles reveal">
+        <div class="principle">
+          <div class="principle-num">01</div>
+          <div class="principle-title">AI-native from day one</div>
+          <p class="principle-text">Every product we build treats AI as core infrastructure — not a feature layer bolted on later.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">02</div>
+          <div class="principle-title">Vertical depth over breadth</div>
+          <p class="principle-text">We go deep on a single market before expanding. Mastery before scale.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">03</div>
+          <div class="principle-title">Revenue before recognition</div>
+          <p class="principle-text">We build companies that earn before they announce. Cash flow is the real proof of concept.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">04</div>
+          <div class="principle-title">Brand independence</div>
+          <p class="principle-text">Each company has its own identity. The holding layer stays invisible to customers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div>
+      <div class="section-tag reveal">Contact</div>
+      <h2 class="cta-heading reveal">Let's build together.</h2>
+      <p class="cta-sub reveal">Whether you're a business looking for AI transformation, a founder interested in the M9Y umbrella, or an investor — we want to hear from you.</p>
+    </div>
+    <div class="contact-cards reveal">
+      <a href="mailto:hello@bundl.ai" class="contact-card">
+        <div class="cc-left">
+          <div class="cc-label">Work with Bundl AI</div>
+          <div class="cc-value">hello@bundl.ai</div>
+        </div>
+        <span class="cc-arrow">↗</span>
+      </a>
+      <a href="mailto:hello@m9y.ai" class="contact-card">
+        <div class="cc-left">
+          <div class="cc-label">Partnerships & Investors</div>
+          <div class="cc-value">hello@m9y.ai</div>
+        </div>
+        <span class="cc-arrow">↗</span>
+      </a>
+      <a href="mailto:careers@m9y.ai" class="contact-card">
+        <div class="cc-left">
+          <div class="cc-label">Careers</div>
+          <div class="cc-value">careers@m9y.ai</div>
+        </div>
+        <span class="cc-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand footer-col">
+      <span class="logo-footer">M9Y AI</span>
+      <p class="footer-tagline">An AI-native venture studio building automation infrastructure and applied intelligence products.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Companies</div>
+      <ul>
+        <li><a href="https://bundl.ai">Bundl AI</a></li>
+        <li><a href="#companies">MakeMyPoll</a></li>
+        <li><a href="#companies">Yeesh</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="#philosophy">About</a></li>
+        <li><a href="mailto:careers@m9y.ai">Careers</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Legal</div>
+      <ul>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Use</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 M9Y AI Pvt Ltd. All rights reserved. Incorporated in India.</span>
+    <div class="footer-legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="mailto:hello@m9y.ai">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
