@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M9Y AI</title>
-<link rel="icon" href="/assets/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="/assets/icon.png">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Archivo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -907,8 +907,8 @@ footer {
   .hero-inner, .section-inner, .cta-inner { padding-left: 24px; padding-right: 24px; }
   .stats-inner { grid-template-columns: 1fr 1fr; padding: 0 24px; }
   .stat-item:nth-child(2) { border-right: none; }
-  .stat-item:nth-child(3) { border-right: 1px solid var(--border); padding-left: 0; }
-  .stat-item:last-child { padding-left: 0; }
+  .stat-item:nth-child(odd) { padding-left: 0; }
+  .stat-item:nth-child(even) { padding-left: 48px; }
   .company-layout { grid-template-columns: 1fr; }
   .company-left { border-right: none; border-bottom: 1px solid var(--border); padding: 36px; }
   .company-right { padding: 36px; }
@@ -926,7 +926,7 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="/" class="logo"><img src="/assets/icon.png" alt="" class="logo-icon" width="32" height="32">M9Y AI</a>
+    <a href="./" class="logo"><img src="assets/icon.png" alt="" class="logo-icon" width="32" height="32">M9Y AI</a>
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#companies">Companies</a></li>
