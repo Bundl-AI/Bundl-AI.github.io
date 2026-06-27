@@ -385,6 +385,10 @@ h1 .dim {
   overflow: hidden;
 }
 
+.company-layout + .company-layout {
+  margin-top: 24px;
+}
+
 .company-left {
   padding: 64px;
   border-right: 1px solid var(--border);
@@ -559,6 +563,10 @@ h1 .dim {
   border-radius: 12px;
   overflow: hidden;
   margin-top: 24px;
+}
+
+.secondary-companies .sec-card:only-child {
+  grid-column: 1 / -1;
 }
 
 .sec-card {
@@ -1069,21 +1077,88 @@ footer {
       </div>
     </div>
 
-    <div class="secondary-companies reveal">
-      <div class="sec-card">
-        <span class="sec-badge">Political AI · Polling</span>
-        <div class="sec-name">MakeMyPoll</div>
-        <p class="sec-desc">An AI pollster built for political parties and campaigns. Real-time sentiment analysis, voter modelling, and polling intelligence — without the lag of traditional research.</p>
-        <div class="sec-features">
-          <div class="sec-feature">AI-generated polling and survey design</div>
-          <div class="sec-feature">Voter sentiment modelling at scale</div>
-          <div class="sec-feature">Campaign intelligence and trend analysis</div>
-          <div class="sec-feature">Real-time political pulse tracking</div>
+    <div class="company-layout reveal">
+      <div class="company-left">
+        <span class="company-badge">● Active · Political AI</span>
+        <div class="company-name-large">MakeMyPoll</div>
+        <p class="company-tagline">An AI pollster built for political parties and campaigns. Real-time sentiment analysis, voter modelling, and polling intelligence — without the lag of traditional research firms.</p>
+
+        <div class="services-grid">
+          <div class="service-cell">
+            <span class="service-cell-icon">◉</span>
+            AI-generated polling & survey design
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">◎</span>
+            Voter sentiment modelling at scale
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">◈</span>
+            Campaign intelligence & trend analysis
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">⟳</span>
+            Real-time political pulse tracking
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">◲</span>
+            Constituency-level insights
+          </div>
+          <div class="service-cell">
+            <span class="service-cell-icon">⚙</span>
+            Automated field survey orchestration
+          </div>
         </div>
+
         <a href="https://makemypoll.ai" class="visit-link">
           makemypoll.ai <span class="arrow">→</span>
         </a>
       </div>
+
+      <div class="company-right">
+        <div class="right-top">
+          <div class="kpi-block">
+            <div class="kpi-label">Focus</div>
+            <div class="kpi-value">Parties & Campaigns</div>
+            <div class="kpi-sub">Election cycles, by-elections, issue tracking</div>
+          </div>
+          <div class="kpi-block">
+            <div class="kpi-label">Delivery model</div>
+            <div class="kpi-value">Platform + Intelligence</div>
+            <div class="kpi-sub">Live dashboards, polling ops, advisory</div>
+          </div>
+          <div class="kpi-block">
+            <div class="kpi-label">Geography</div>
+            <div class="kpi-value">India-first</div>
+            <div class="kpi-sub">State, district & booth-level coverage</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="right-divider"></div>
+          <div class="detail-rows">
+            <div class="detail-row">
+              <span class="row-key">Parent entity</span>
+              <span class="row-val">M9Y AI Pvt Ltd</span>
+            </div>
+            <div class="detail-row">
+              <span class="row-key">Product website</span>
+              <span class="row-val">makemypoll.ai</span>
+            </div>
+            <div class="detail-row">
+              <span class="row-key">Stage</span>
+              <span class="row-val">Pilot program phase</span>
+            </div>
+            <div class="detail-row">
+              <span class="row-key">Type</span>
+              <span class="row-val">AI Caller + Analytics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secondary-companies reveal">
       <div class="sec-card">
         <span class="sec-badge">AI Hiring · Talent</span>
         <div class="sec-name">Yeesh</div>
